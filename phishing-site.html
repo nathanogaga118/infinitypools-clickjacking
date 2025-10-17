@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinity Pools - Connect Wallet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0e27;
+            color: white;
+            min-height: 100vh;
+        }
+
+        .warning-banner {
+            background: #ff3333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .attack-success {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(255, 0, 0, 0.3);
+        }
+
+        .attack-success h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .attack-success p {
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+        .fake-login {
+            background: white;
+            color: #333;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .fake-login h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .fake-input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .fake-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .fake-button:hover {
+            opacity: 0.9;
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #ffc107;
+        }
+
+        .info-box h3 {
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+
+        .info-box ul {
+            margin-left: 20px;
+            line-height: 2;
+        }
+
+        .info-box li {
+            margin: 10px 0;
+        }
+
+        .url-bar {
+            background: #1a1f3a;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-family: monospace;
+            border: 2px solid #ffc107;
+        }
+
+        .url-bar span {
+            color: #ffc107;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="warning-banner">
+        🚨 CLICKJACKING ATTACK SUCCESSFUL - USER HAS BEEN REDIRECTED 🚨
+    </div>
+
+    <div class="container">
+        <div class="attack-success">
+            <h1>⚠️ ATTACK DEMONSTRATION</h1>
+            <p><strong>The victim clicked what they thought was a button on infinitypools.finance</strong></p>
+            <p style="margin-top: 20px;">They have now been redirected to this attacker-controlled phishing site!</p>
+        </div>
+
+        <div class="url-bar">
+            <p>🌐 Attacker's URL: <span>https://infinitypooIs.finance/connect</span></p>
+            <p style="font-size: 12px; margin-top: 10px; color: #999;">
+                (Notice the capital "i" instead of lowercase "L" - a common phishing technique)
+            </p>
+        </div>
+
+        <div class="fake-login">
+            <h2>🔒 Connect Your Wallet</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 20px;">
+                To continue earning, please enter your wallet recovery phrase
+            </p>
+            <input type="text" class="fake-input" placeholder="Wallet Address" disabled>
+            <textarea class="fake-input" rows="4" placeholder="Enter your 12 or 24 word recovery phrase..." disabled></textarea>
+            <button class="fake-button" disabled>Connect Wallet (DEMO - Disabled)</button>
+            <p style="text-align: center; color: #999; margin-top: 15px; font-size: 14px;">
+                ⚠️ In a real attack, this would steal the user's credentials
+            </p>
+        </div>
+
+        <div class="info-box">
+            <h3>💀 What Would Happen in a Real Attack:</h3>
+            <ul>
+                <li><strong>Wallet Drainage:</strong> User's recovery phrase is stolen, attacker gains full access to their crypto wallet</li>
+                <li><strong>Malicious Approvals:</strong> User unknowingly signs smart contract approvals giving attacker unlimited token access</li>
+                <li><strong>Session Hijacking:</strong> Cookies and session tokens are stolen for account takeover</li>
+                <li><strong>Credential Theft:</strong> Login information captured for future attacks</li>
+                <li><strong>Social Engineering:</strong> User trusts the site because they clicked through from what appeared to be legitimate</li>
+            </ul>
+        </div>
+
+        <div class="info-box" style="margin-top: 20px; border-left-color: #28a745;">
+            <h3>✅ How to Prevent This Attack:</h3>
+            <ul>
+                <li><strong>X-Frame-Options: DENY</strong> - Prevents the site from being embedded in iframes</li>
+                <li><strong>Content-Security-Policy: frame-ancestors 'none'</strong> - Modern alternative to X-Frame-Options</li>
+                <li><strong>Frame-busting JavaScript</strong> - Secondary defense (can be bypassed, not recommended as primary defense)</li>
+            </ul>
+            <p style="margin-top: 20px; color: #28a745;">
+                <strong>Implementation:</strong> Add these headers to your server response:
+            </p>
+            <pre style="background: #0a0e27; padding: 15px; border-radius: 5px; margin-top: 10px; overflow-x: auto;">
+X-Frame-Options: DENY
+Content-Security-Policy: frame-ancestors 'none'</pre>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 10px;">
+            <p style="font-size: 14px; color: #999;">This is a security research demonstration</p>
+            <p style="font-size: 14px; color: #999; margin-top: 10px;">Report submitted for: infinitypools.finance</p>
+        </div>
+    </div>
+
+    <script>
+        // Log the successful "attack" for demonstration
+        console.log('🚨 ATTACK SUCCESSFUL');
+        console.log('📍 Victim redirected to phishing site');
+        console.log('🎯 Attacker can now:');
+        console.log('   - Display fake wallet connection prompts');
+        console.log('   - Steal recovery phrases');
+        console.log('   - Execute malicious smart contracts');
+        console.log('   - Capture credentials');
+        
+        // Alert to make it clear this is a demonstration
+        alert('⚠️ CLICKJACKING ATTACK DEMONSTRATION\n\nThe victim thought they were clicking a button on the legitimate infinitypools.finance site.\n\nInstead, they were redirected to this attacker-controlled phishing site.\n\nIn a real attack, this page would look identical to Infinity Pools and steal the user\'s wallet credentials.');
+    </script>
+</body>
+</html>
